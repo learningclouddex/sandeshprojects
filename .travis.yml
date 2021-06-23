@@ -1,0 +1,13 @@
+# Anytime We use Docker we need to have super user permissions
+sudo: required
+language: generic
+
+# We need DockerCLI Preinstalled  this install Docker in the running container that travis CI sets up for us
+services:
+  - docker
+# Series of setup before we start to deploy our project
+before_install:
+  - docker build -t sandeshclouddex/docker-react -f Dockerfile.dev .
+# Script to be executed 
+script:
+  - docker run -e CI=true sandeshclouddex/docker-react npm run test
