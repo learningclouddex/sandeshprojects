@@ -9,15 +9,15 @@ before_install:
 
 
 deploy:
-  on:
-  branch: master
   provider: elasticbeanstalk
-  access_key_id:
-    secure: $AWS_ACCESS_KEY
-  secret_access_key:
-    secure: $AWS_SECRET_KEY
   region: 'us-east-1'
   app: 'docker-react-clouddex'
   env: 'Dockerreactclouddex-env'
   bucket_name: 'elasticbeanstalk-us-east-1-465144203179'
   bucket_path: 'docker-react-clouddex'
+  on:
+    branch: main
+  access_key_id:
+    secure: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: $AWS_SECRET_KEY  
