@@ -19,5 +19,5 @@ deploy:
   bucket_path: 'docker-react-clouddex'
   on:
     branch: main
-    access_key_id: AKIAWYTGBI6VXNOOZP67
-    secret_access_key: 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    
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY    
