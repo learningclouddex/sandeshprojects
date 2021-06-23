@@ -1,13 +1,23 @@
-# Anytime We use Docker we need to have super user permissions
 sudo: required
 language: generic
 
-# We need DockerCLI Preinstalled  this install Docker in the running container that travis CI sets up for us
 services:
   - docker
-# Series of setup before we start to deploy our project
+
 before_install:
-  - docker build -t sandeshclouddex/docker-react -f Dockerfile.dev .
-# Script to be executed 
+  - docker build -t stephengrider/docker-react -f Dockerfile.dev .
+
 script:
-  - docker run -e CI=true sandeshclouddex/docker-react npm run test
+  - docker run -e CI=true stephengrider/docker-react npm run test
+
+deploy:
+  provider: elasticbeanstalk
+  region: 'us-east-1'
+  app: 'docker-react-clouddex'
+  env: 'Dockerreactclouddex-env'
+  bucket_name: 'elasticbeanstalk-us-east-1-465144203179'
+  bucket_path: 'docker-react-clouddex'
+  on:
+    branch: main
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY    
